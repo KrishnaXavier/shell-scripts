@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo "valor inicial: "
+read inicial
+
+echo "valor final: "
+read final
+
+echo "passo: "
+read passo
+
+while test  $inicial -le  $final
+do
+inicial=$((inicial+passo))
+echo "loop: $inicial"
+done
