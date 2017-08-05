@@ -1,0 +1,11 @@
+#!/bin/bash
+
+c=$1
+echo "$c"
+
+
+for i in $(seq  $c)
+do 
+s=$((c-i))
+echo "$s"
+done
