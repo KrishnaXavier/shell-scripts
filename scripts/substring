@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if echo "$2" | egrep "$1" >/dev/null
+then
+echo "$1 esta contida em $2"
+else
+echo "não esta contida"
+fi
