@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "Fazer copia do arquivo path? s/n"
+read res
+test "$res" = n && exit
+cp path  /tmp/path
+
+echo "Quer deligar o PC? s/n"
+read res
+test "$res" = n && exit
+shutdow -r 120

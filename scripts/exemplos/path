@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "Corrente: ${PWD}"
+echo "Usuario: $USER"
+

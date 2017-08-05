@@ -1,0 +1,20 @@
+#!/bin/bash
+
+echo "tempo que o sistema esta em uso: "
+uptime
+
+echo
+echo "versão do kernel: "
+uname -r
+
+echo
+echo "uso de disco"
+df -h
+
+echo
+echo "estado da memoria"
+free -m -t
+
+echo
+echo "rede esta funcionando"
+ifconfig

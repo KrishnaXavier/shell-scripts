@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for passo in  $(seq 10)
+do 
+echo "Comandos: $passo"
+done

@@ -1,0 +1,11 @@
+#!/bin/bash
+while:
+do
+if test -f/tmp/lock
+then
+echo "Aguardando liberação do lock..."
+sleep 1
+else
+break
+fi
+done

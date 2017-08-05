@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "numero"
+read var
+
+if test "$var" -gt 10
+then
+echo "maior que 10"
+else
+echo "menor que 10"
+fi

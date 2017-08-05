@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for numero in  u d t q c
+do 
+echo "Comandos: $numero"
+done

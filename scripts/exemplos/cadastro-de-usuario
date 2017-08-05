@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo "Cadastro de usuário:"
+echo
+
+echo "nome: "
+read  user
+
+echo
+echo "senha: "
+read pass
+
+adduser $user
+passwd $pass
