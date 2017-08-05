@@ -1,0 +1,26 @@
+#!/bin/bash
+
+echo "1-soma, 2- subtracao, 3-divisao, 4-multiplicacao"
+echo "digite sua opcao: "
+read res
+
+if test "$res" -eq 1
+then
+echo  $(($1+$2))
+
+elif test "$res" -eq 2
+then
+echo $(($1-$2))
+
+elif test "$res" -eq 3
+then
+echo $(($1/$2))
+
+elif test "$res" -eq 4
+then
+echo $(($1*$2))
+
+else
+echo "valor digitado não correspondente"
+
+fi
