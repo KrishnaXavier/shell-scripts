@@ -1,0 +1,19 @@
+#!/bin/bash
+# arquivo com as principais funções
+
+interface(){
+echo "------------------"
+echo "INTERFACE:"
+echo "1 - ..."
+echo "2 - ..."
+sout "3 - ..."
+sout "4 - ..."
+sout "5 - ..."
+sout "6 - exit"
+}
+
+# função de redução
+sout ()
+{
+echo $1
+}
