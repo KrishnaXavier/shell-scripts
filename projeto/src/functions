@@ -1,1 +1,33 @@
+#!/bin/bash
 # arquivo com as principais funções
+
+interface(){
+opcao = 6
+while [ "$opcao" != "6" ]
+do
+	sout "------------------"
+	sout "INTERFACE:"
+	sout "1 - ..."
+	sout "2 - ..."
+	sout "3 - ..."
+	sout "4 - ..."
+	sout "5 - ..."
+	sout "6 - exit"
+	sout "O que deseja fazer: "
+	read opcao
+
+	case $opcao in
+		1) sout "1";;
+		2) sout "2";;
+		3) sout "3";;
+		4) sout "4";;
+		5) sout "5";;
+		6) sout "exit";;
+		*) sout "opção invalida";;
+	esac
+done
+}
+
+sout(){ 
+echo $1 
+}
