@@ -1,0 +1,6 @@
+if [ -f src/functions ]
+then
+source src/functions
+else
+echo "Arquivo functions não foi encontrado"
+fi
