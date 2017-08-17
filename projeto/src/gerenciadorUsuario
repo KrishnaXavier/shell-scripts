@@ -73,6 +73,7 @@ removerUsuario() {
   	clear
   	echo "Nome do usuario a ser removido: "
   	read user
+  	#-rf força a remoção
   	userdel -rf $user  
 }
 
@@ -88,6 +89,7 @@ infoUsuario() {
   	echo "Nome do usuario a ser visualizado: "
   	read user
   	clear
+  	#finger é comando externo  (apt-get install finger)
   	finger $user
   	return
 }
