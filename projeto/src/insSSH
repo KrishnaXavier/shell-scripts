@@ -1,6 +1,6 @@
 function ssh_install ()
-{
-	if dpkg -l | grep openssh-server
+{	
+	if dpkg -l | grep openssh-server &> /dev/null
 	then
 		echo " Servidor ssh ja esta instalado";
 	else
