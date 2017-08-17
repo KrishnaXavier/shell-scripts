@@ -3,7 +3,7 @@
 interface(){
 	clear
 	opcao = 6
-	while [ "$opcao" != "6" ]
+	while [ "$opcao" != "0" ]
 	do	
 		echo "------------------"
 		echo "INTERFACE:"
@@ -18,7 +18,7 @@ interface(){
 			1) gerenciarUsuario	;;
 			2) info 			;;
 			3) diagnostico 		;;			
-			0) echo exit;;
+			0) echo "sair"      ;;
 			*) echo "opção invalida";;
 		esac	
 	done

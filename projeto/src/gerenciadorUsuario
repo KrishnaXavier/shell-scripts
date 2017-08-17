@@ -2,7 +2,7 @@
 #funções para gerenciamento de usuarios
 gerenciarUsuario(){
 opcao = 6
-while [ "$opcao" != "6" ]
+while [ "$opcao" != "0" ]
 do	
 	echo "------------------"
 	echo "GERENCIADOR DE USUARIO:"
@@ -15,7 +15,7 @@ do
 	echo "7 - Remover Grupo"
 	echo "8 - Informações do Usuario"
 	echo "9 - Grupos que o Usuario pertence"
-	echo "10 - exit"
+	echo "0 - Sair"
 	echo "O que deseja fazer: "
 	read opcao
 	clear
@@ -29,7 +29,7 @@ do
 		7) removerGrupo				;;
 		8) infoUsuario				;;
 		9) gruposDoUsuario			;;		
-		10) exit					;;
+		0) echo "sair"				;;
 		*) echo "opção invalida"	;;
 	esac
 done	
