@@ -12,6 +12,13 @@ else
 	echo "Arquivo redes não foi encontrado"
 fi
 
+if [ -f src/insSSH ]
+then
+	source src/insSSH
+else
+	echo "Arquivo insSSH não foi encontrado"
+fi
+
 if [ -f src/functions ]
 then
 	source src/functions

@@ -1,0 +1,128 @@
+function ssh_install ()
+{
+	if dpkg -l | grep openssh-server
+	then
+		echo " Servidor ssh ja esta instalado";
+	else
+	{
+		echo " Iniciando instalação do servidor ssh...";
+		echo " Testando conexão com a rede...";
+
+		if ping -c 1 www.google.com &> /dev/null
+		then
+		{
+			echo " iniciando instalação...";
+			echo " Instalando... Aguarde";
+			if apt-get -y install openssh-server &> /dev/null
+			then
+				echo " Instalação concluída";
+			else
+			{
+				echo " Erro ao instalar servidor ssh, abortando..."
+				return 1;
+			}
+			fi
+		}
+		else
+		{
+			echo "Abortando instalação...";
+			return 1;
+		}
+		fi
+	}
+	fi
+
+	echo " Deseja realizar a configuração básica do servidor ssh?";
+	read -n 1 -s resp;
+
+	if [ $resp == "n" ]
+	then
+		return 0;
+	fi
+
+	echo " Fazendo backup do arquivo de configuração original..."
+	if mv /etc/ssh/sshd_config /etc/ssh/sshd_config.backup
+	then
+		echo " Backup concluído";
+	else
+	{
+		echo " Falha ao criar backup. Abortando por questões de segurança...";
+		return 1;
+	}
+	fi
+
+	echo "Iniciando configuração...";
+	echo "";
+		
+	echo -n " Digite a porta entre 1 e 65535 ( padrão 22 ): ";
+	read port;
+	while [ $port -lt 0 -o $port -gt 65535 ]
+	do
+	{
+		echo -n " Parâmetro incorreto. Digite novamente: ";
+		read port;
+	}
+	done
+	
+	echo -n " Digite a interface/ip do serviço ( 0.0.0.0 todas ): "
+	read ip;
+
+	echo -n " Digite o intervalo de atualização da chave ( em segundos ): ";
+	read time;
+	while [ $time -lt 0 ]
+	do
+	{
+		echo -n " Parâmetro incorreto. Digite novamente: ";
+		read time;
+	}
+	done
+
+	echo -n " Digite o tamanho da chave ( 1024 é o padrão ): ";
+	read key;
+	while [ $key -lt 0 ]
+	do
+	{
+		echo -n " Parâmetro incorreto. Digite novamente: ";
+		read key;
+	}
+	done
+
+	echo -n " Permitir login como root?(yes/no) ";
+	read root;
+	while [ $root != "yes" -a $root != "no" ]
+	do
+	{
+		echo -n " Parâmetro incorreto. Digite novamente: ";
+		read root;
+	}
+	done
+
+	echo " Criando arquivo de configuração...";
+	echo "Port $port" >> /etc/ssh/sshd_config;
+	echo "ListenAddress $ip" >> /etc/ssh/sshd_config;
+	echo "Protocol 2 " >> /etc/ssh/sshd_config;
+	echo "PermitRootLogin $root" >> /etc/ssh/sshd_config;
+	echo "StrictModes yes" >> /etc/ssh/sshd_config;
+	echo "RSAAuthentication yes" >> /etc/ssh/sshd_config;
+	echo "PubkeyAuthentication yes" >> /etc/ssh/sshd_config;
+	echo "AuthorizedKeysFile   %h/.ssh/authorized_keys" >> /etc/ssh/sshd_config;
+	echo "IgnoreRhosts yes" >> /etc/ssh/sshd_config;
+	echo "PermitEmptyPasswords no" >> /etc/ssh/sshd_config;
+	echo "ChallengeResponseAuthentication no" >> /etc/ssh/sshd_config;
+	echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config;
+	echo "X11Forwarding yes" >> /etc/ssh/sshd_config;
+	echo "X11DisplayOffset 10" >> /etc/ssh/sshd_config;
+	echo "PrintMotd no" >> /etc/ssh/sshd_config;
+	echo "PrintLastLog yes" >> /etc/ssh/sshd_config;
+	echo "TCPKeepAlive yes" >> /etc/ssh/sshd_config;
+	echo "MaxAuthTries 2" >> /etc/ssh/sshd_config;
+	echo "MaxSessions 1" >> /etc/ssh/sshd_config;
+	echo " Arquivo criado."
+	if service ssh restart
+	then
+		echo "Ssh configurado";
+	else
+		echo "Falha na configuração";
+	fi
+	
+}

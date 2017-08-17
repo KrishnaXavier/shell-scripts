@@ -7,19 +7,30 @@ interface(){
 	do	
 		echo "------------------"
 		echo "INTERFACE:"
-		echo "1 - Gerenciar Usuários"
+		echo "1 - Interface de gerenciamento de Usuários"
 		echo "2 - Informações do Sistema"
-		echo "3 - Diagnóstico de Rede"		
+		echo "3 - Diagnóstico de Rede"
+		echo "4 - Interface para analisar o que está acontecendo em sua rede"
+		echo "5 - SSH"
 		echo "0 - Sair"
 		echo "O que deseja fazer: "
 		read opcao
 		clear
 		case $opcao in
-			1) gerenciarUsuario	;;
-			2) info 			;;
-			3) diagnostico 		;;			
-			0) echo "sair"      ;;
+			1) gerenciarUsuario		;;
+			2) info 				;;
+			3) diagnostico 			;;			
+			4) InterfaceIPTRAF 		;;
+			5) ssh_install 			;;
+			0) echo "sair"      	;;
 			*) echo "opção invalida";;
 		esac	
 	done
+}
+
+InterfaceIPTRAF(){
+	#O IPTraf é um programa que fornece uma interface gráfica para analisar o que está acontecendo em sua rede. 
+	apt-get install iptraf
+	iptraf
+	exit
 }
