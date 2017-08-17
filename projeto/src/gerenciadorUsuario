@@ -1,0 +1,103 @@
+#!/bin/bash
+#funções para gerenciamento de usuarios
+gerenciarUsuario(){
+opcao = 6
+while [ "$opcao" != "6" ]
+do	
+	echo "------------------"
+	echo "GERENCIADOR DE USUARIO:"
+	echo "1 - Listar Usuarios"
+	echo "2 - Criar Usuario (root)"
+	echo "3 - Remover Usuario"
+	echo "4 - Criar Grupo"
+	echo "5 - Adicionar Usuario em  um Grupo"
+	echo "6 - Remover Usuario"
+	echo "7 - Remover Grupo"
+	echo "8 - Informações do Usuario"
+	echo "9 - Grupos que o Usuario pertence"
+	echo "10 - exit"
+	echo "O que deseja fazer: "
+	read opcao
+	clear
+	case $opcao in
+		1) listarUsuario     		;;
+		2) criarUsuario      		;;
+		3) removerUsuario    		;;
+		4) criarGrupoUsuario    	;;
+		5) adicionarUsuarioGrupo	;;
+		6) removerUsuario			;;
+		7) removerGrupo				;;
+		8) infoUsuario				;;
+		9) gruposDoUsuario			;;		
+		10) exit					;;
+		*) echo "opção invalida"	;;
+	esac
+done	
+}
+
+criarUsuario(){
+	clear
+  	echo "Nome do novo usuário: "
+  	read user  	
+  	adduser $user   	
+}
+
+listarUsuario(){
+	#cut -d: -f1 /etc/passwd
+	awk -F':' '{ print $1}' /etc/passwd
+}
+
+loginUsuario(){
+	echo "Nome do usuario que deseja logar: "
+	read $user
+	su - $user
+}
+
+criarGrupoUsuario() {
+  	clear
+  	echo "Nome do novo grupo: "
+  	read grupo
+  	addgroup $grupo  
+}
+
+adicionarUsuarioGrupo() {
+  	clear
+  	echo "Nome do usuario: "
+  	read user
+  	echo "Nome do grupo: "
+  	read grupo
+  	adduser $user $grupo  
+}
+
+removerUsuario() {
+  	clear
+  	echo "Nome do usuario a ser removido: "
+  	read user
+  	userdel -rf $user  
+}
+
+removerGrupo() {
+ 	clear
+ 	echo "Nome do grupo deseja remover?"
+ 	read grupo
+ 	groupdel $grupo  
+}
+
+infoUsuario() {
+	clear
+  	echo "Nome do usuario a ser visualizado: "
+  	read user
+  	clear
+  	finger $user
+  	return
+}
+
+gruposDoUsuario() {
+  	clear
+  	echo "Nome do usuario a ser visualizado: "
+  	read user
+  	clear
+  	echo "Usuario : grupos que participa"
+  	echo
+  	groups $user  
+}

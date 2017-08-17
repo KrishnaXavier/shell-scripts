@@ -2,32 +2,29 @@
 # arquivo com as principais funções
 
 interface(){
+	clear
 opcao = 6
 while [ "$opcao" != "6" ]
-do
-	sout "------------------"
-	sout "INTERFACE:"
-	sout "1 - ..."
-	sout "2 - ..."
-	sout "3 - ..."
-	sout "4 - ..."
-	sout "5 - ..."
-	sout "6 - exit"
-	sout "O que deseja fazer: "
+do	
+	echo "------------------"
+	echo "INTERFACE:"
+	echo "1 - Gerenciar Usuários"
+	echo "2 - ..."
+	echo "3 - ..."
+	echo "4 - ..."
+	echo "5 - ..."
+	echo "6 - exit"
+	echo "O que deseja fazer: "
 	read opcao
-
+	clear
 	case $opcao in
-		1) sout "1";;
-		2) sout "2";;
-		3) sout "3";;
-		4) sout "4";;
-		5) sout "5";;
-		6) sout "exit";;
-		*) sout "opção invalida";;
-	esac
+		1) gerenciarUsuario	;;
+		2) echo "2";;
+		3) echo "3";;
+		4) echo "4";;
+		5) echo "5";;
+		6) echo exit;;
+		*) echo "opção invalida";;
+	esac	
 done
-}
-
-sout(){ 
-echo $1 
 }

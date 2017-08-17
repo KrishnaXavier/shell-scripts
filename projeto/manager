@@ -1,6 +1,13 @@
 if [ -f src/functions ]
 then
-source src/functions
+	source src/functions
 else
-echo "Arquivo functions não foi encontrado"
+	echo "Arquivo functions não foi encontrado"
+fi
+
+if [ -f src/gerenciadorUsuario ]
+then
+	source src/gerenciadorUsuario
+else
+	echo "Arquivo gerenciadorUsuario não foi encontrado"
 fi
