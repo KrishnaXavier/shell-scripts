@@ -1,0 +1,76 @@
+#!/bin/bash
+# arquivo com as principais funções
+
+function info ()
+{
+	echo "----------------------------------------------------";
+	echo "Nome da máquina: "$(hostname);
+	echo "Sistema Operacional: "$(uname -o);
+	echo "Versão do kernel: "$(uname -v);
+	echo "Processos em execução: "$(ps -aux | wc -l);
+	echo "Usuarios conectados: "$(who | wc -l);
+	echo "Tempo de uso do usuário atual: "$(uptime -p)
+	echo "Memória: "$(free -h | awk ' $1 == "Mem:" { print "total - ", $2, "/ Em uso -", $3}');
+	echo "Swap: "$(free -h | awk ' $1 == "Swap:" { print "total - ", $2, "/ Em uso -", $3}');
+	echo "Disco: "$(df -h | awk ' $6 == "/" { print "total - ", $2, " / Em uso -", $3}');
+	echo "----------------------------------------------------" 	
+}
+
+function diagnostico (){
+	echo "----------------------------------------------------";
+	if ping -c 1 www.google.com &> /dev/null;
+	then
+		echo "Conexão OK";
+	else 
+	{
+		echo " Falha na conexão...";
+		echo " Iniciando diagnóstico...";
+			
+		echo " Testando conexão com dns da google...";
+		ping -c 1 8.8.8.8 &> /dev/null && echo " Conexão OK" || echo " Falha na Conexão";
+		
+		echo " Testando servidores DNS configurados no sistema...";
+	
+		if cat /etc/resolv.conf | grep "nameserver" > /dev/null; 
+		then
+		{
+			echo " Servidores DNS encontrados..."
+			echo " Testando DNSs..."
+			dns=$(cat /etc/resolv.conf | awk ' $1 == "nameserver" {print $2}');
+			cont=0;
+			for i in $dns
+			do
+        			echo " Testando $i...";
+				if ping -c 1 $i &> /dev/null;
+				then
+				{
+					echo " Conexão OK."; 
+					cont=$(($cont+1)); 
+				}
+				else
+					echo " Falha na conexão.";
+				fi				
+			done
+			
+			if [ $cont -eq 0 ];
+			then
+				echo " Não houve resposta de nenhum dos servidores DNS configurados!"
+			fi
+		}
+		else
+			echo " Não há servidores DNS configurados no resolv.conf!";
+		fi
+
+		echo " Testando conexão com o Gateway...";
+		gate=$(route -n | awk '$1=="0.0.0.0" { print $2}');
+		echo " Gateway da rede: $gate";
+		if ping -c 1 $gate  &> /dev/null;
+		then
+			echo " Conexão com o Gateway OK";
+		else
+			echo " Conexão com Gateway falhou!";
+		fi
+	}
+	fi
+	echo "----------------------------------------------------";
+}

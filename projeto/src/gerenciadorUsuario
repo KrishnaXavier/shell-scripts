@@ -7,7 +7,7 @@ do
 	echo "------------------"
 	echo "GERENCIADOR DE USUARIO:"
 	echo "1 - Listar Usuarios"
-	echo "2 - Criar Usuario (root)"
+	echo "2 - Criar Usuario"
 	echo "3 - Remover Usuario"
 	echo "4 - Criar Grupo"
 	echo "5 - Adicionar Usuario em  um Grupo"
