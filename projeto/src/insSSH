@@ -1,5 +1,5 @@
 function ssh_install ()
-{	
+{
 	if dpkg -l | grep openssh-server &> /dev/null
 	then
 		echo " Servidor ssh ja esta instalado";
@@ -56,7 +56,7 @@ function ssh_install ()
 		
 	echo -n " Digite a porta entre 1 e 65535 ( padrão 22 ): ";
 	read port;
-	while [ $port -lt 0 -o $port -gt 65535 ]
+	while echo $port | egrep '[^0-9]' &> /dev/null || [ $port -lt 0 -o $port -gt 65535 ]
 	do
 	{
 		echo -n " Parâmetro incorreto. Digite novamente: ";
@@ -69,7 +69,7 @@ function ssh_install ()
 
 	echo -n " Digite o intervalo de atualização da chave ( em segundos ): ";
 	read time;
-	while [ $time -lt 0 ]
+	while echo $time | egrep '[^0-9]' &> /dev/null || [ $time -lt 0 ]
 	do
 	{
 		echo -n " Parâmetro incorreto. Digite novamente: ";
@@ -79,7 +79,7 @@ function ssh_install ()
 
 	echo -n " Digite o tamanho da chave ( 1024 é o padrão ): ";
 	read key;
-	while [ $key -lt 0 ]
+	while echo $key | egrep '[^0-9]' &> /dev/null || [ $key -lt 0 ]
 	do
 	{
 		echo -n " Parâmetro incorreto. Digite novamente: ";
